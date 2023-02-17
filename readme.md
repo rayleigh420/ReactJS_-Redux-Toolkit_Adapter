@@ -1,0 +1,2 @@
+// Nếu lấy selector từ getSelector() mà không truyền ham số thì ta chỉ có thể gọi nó trong slice và phải truyền state.todo hoặc todo vào mới có thể chạy
+// Nếu lấy selector từ getSelector((state) => state.todo) truyền tham số thì ta chỉ có thể gọi nó ở component 
