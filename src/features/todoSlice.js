@@ -32,19 +32,15 @@ export const { selectAll: testSelectAll2 } = todoAdapter.getSelectors();
 
 // export const { selectAll } = todoAdapter.getSelectors((state) => state.todo);
 // console.log(todoAdapter.getSelectors().selectAll(state)); // vi dat ten la todo trong store nen phai goi la todo
-export const testSelector = createSelector([(state) => state.todo], (todo) => {
-  // console.log("RTK:::testSelectAll1: ", testSelectAll1());
+export const testSelector = createSelector([(state) => state, (state) => state.todo], (state, todo) => {
+  console.log("RTK:::testSelectAll1: ", testSelectAll1(state));
   console.log("RTK:::testSelectAll2: ", testSelectAll2(todo));
-  // console.log(
-  //   "test1: ",
-  //   todoAdapter.getSelectors((state) => state.todo).selectAll()
-  // );
+  
+  console.log(
+    "test1: ",
+    todoAdapter.getSelectors((state) => state.todo).selectAll(state)
+  );
   console.log("test2: ", todoAdapter.getSelectors().selectAll(todo));
-  // console.log(
-  //   "test1: ",
-  //   todoAdapter.getSelectors((state) => state.todo).selectAll(todo)
-  // );
-  // console.log("test2: ", selectAll());
 });
 
 export default todoSlice.reducer;

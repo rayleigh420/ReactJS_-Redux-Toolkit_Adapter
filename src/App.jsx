@@ -16,8 +16,9 @@ function App() {
   };
 
   const dispatch = useDispatch();
+  // Tự động truyền state vào testSelectAll1
   const select1 = useSelector(testSelectAll1);
-  // const select2 = useSelector(testSelectAll2(state.todo));
+  const select2 = useSelector((state) => testSelectAll2(state.todo));
   const test = useSelector((state) => testSelector(state));
 
   const dispathAction = () => {
@@ -25,8 +26,8 @@ function App() {
   };
 
   console.log("testSlector1: ", select1);
+  console.log("testSlector2: ", select2);
   const show = () => {
-    // console.log("testSlector2: ", select2);
   };
 
   return (

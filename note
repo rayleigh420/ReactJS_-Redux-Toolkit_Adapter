@@ -1,0 +1,14 @@
+1. Nếu const globalizedSelectors = booksAdapter.getSelectors((state) => state.books)
+thì khi gọi selector ta vẫn phải truyền tham số chỉ cây của store. (store.getState() ở các nơi không cấp cho state tree)
+Nếu truyền ở useSelector thì hook cung cấp state tree của store là state nên ta chỉ cần truyền như sau:
+const allBooks = useSelector(selectAll) hoặc const allBooks = useSelector((state) => selectAll(state))
+rtk hỗ trợ useSelector mặc định truyền vào state nếu ta chỉ cần truyền state cho selector nên cả 2 cách trên là tương đương viết tắt và viết rõ
+không thể truyền useSelector(selectAll(state)) bởi useSelector phải nhận vào một callback function hay còn gọi là một selector function nếu truyền vậy thì là truyền kết quả của selector không phải truyền function
+
+2. Nếu const simpleSelectors = booksAdapter.getSelectors()
+thì khi gọi selector ta phải truyền vào state của slice chỉ rõ slice ta cần lấy thông qua state tree của store
+Nếu truyền ở các nơi khác không cung cấp state tree mặc định như trong các useSelector thì ta cần truyền:
+const bookIds = simpleSelectors.selectIds(store.getState().books) thông qua state tree
+Tuy nhiên nếu ta dùng chúng trong component thì với useSelector đã cung cấp mặc định cho ta tham số state ~~ store.getState()
+nên ta gọi như sau const bookIds = useSelector((state) => selectIds(state.books)) như đã nói ở trên không được truyền:
+bookIds = useSelector(selectIds(state.books)) // Lỗi
