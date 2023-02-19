@@ -4,7 +4,11 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 
-const todoAdapter = createEntityAdapter();
+const todoAdapter = createEntityAdapter({
+  addOneContent: (state, action) => {
+    state
+  }
+});
 
 const initialState = todoAdapter.getInitialState();
 
@@ -14,10 +18,6 @@ const todoSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       todoAdapter.addOne(state, action.payload);
-      // console.log(
-      //   "hello: ",
-      //   todoAdapter.getSelectors((state) => state.todo).selectAll(state)
-      // );
     },
   },
 });
@@ -41,6 +41,7 @@ export const testSelector = createSelector([(state) => state, (state) => state.t
     todoAdapter.getSelectors((state) => state.todo).selectAll(state)
   );
   console.log("test2: ", todoAdapter.getSelectors().selectAll(todo));
+  
 });
 
 export default todoSlice.reducer;
